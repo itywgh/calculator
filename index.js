@@ -9,11 +9,12 @@ const clearButton = document.querySelector('.clear-button');
 
 
 // LET VARIABLES
-let a;
-let b;
+let a = 0;
+let b = 0;
 let isOperator;
 let myOperator;
 let result;
+let isDecimal;
 
 
 // var displayValue = 0;
@@ -22,31 +23,40 @@ let result;
 
 // FUNCTION
 const saveOperand = (e) => {
-  if(e.target.textContent === "." && isOperator) {
-    a += ".";
-  } else if (e.target.textContent === "." && !isOperator) {
-    b += ".";
-  }
+  // if(e.target.textContent === "." && isOperator) {
+  //   a += ".";
+  // } else if (e.target.textContent === "." && !isOperator) {
+  //   b += ".";
+  // }
 
-  if(!a) {
+  if(!a || isDecimal === true) {
     isOperator = true;
-    a = e.target.textContent;
+    a += parseFloat(e.target.textContent);
     currentOperation.textContent = a;
     console.log(a);
   } else if(e.target.textContent === "." && isOperator) {
+    console.log(`decimal and isOperator ${isOperator}`)
     a += ".";
-  } else if(e.target.textContent === "." && !isOperator) {
-    b += ".";
+    isDecimal = true;
+    console.log(`new a = ${a}`);
   } else if(!b) {
+    if(isDecimal) {
+      a += e.target.textContent;
+      return;
+    }
+
     isOperator = false;
     b = e.target.textContent;
     currentOperation.textContent = b;
     console.log(b);    
-    operate(parseInt(a), parseInt(b), translateOperator(myOperator));
+    operate(parseFloat(a), parseFloat(b), translateOperator(myOperator));
     // Remember that operate() doesn't return a result
     // Do not console.log(result)
     // Go to operate()
-  } 
+  } else if(e.target.textContent === "." && !isOperator) {
+    console.log(`decimal and isOperator ${isOperator}`)
+    b += ".";
+  }
 };
 
 
@@ -58,7 +68,8 @@ operators.forEach(operator =>
   operator.addEventListener('click', (e) => {
     if (isOperator) {
       myOperator = e.target.textContent;
-      console.log(myOperator);      
+      console.log(myOperator);
+      isDecimal = false;   
     } else {
       myOperator = e.target.textContent;
       console.log(myOperator);    
@@ -66,6 +77,7 @@ operators.forEach(operator =>
       a = result;
       b = null;
       isOperator = true;
+      isDecimal = false;
     }   
 }));
 
