@@ -134,7 +134,7 @@ function inputOperator(e) {
 }
 
 function inputEqual(e) {
-  if (result === Infinity) {
+  if (result === Infinity || result === -Infinity) {
     dividedByZero();
     return;
   }
@@ -259,30 +259,28 @@ clearButton.addEventListener('click', clearCalc);
 
 
 // KEYBOARD EVENT LISTENER
-window.addEventListener('keydown', e =>
-{
-    keyboardEvents(e);    
+window.addEventListener('keydown', e => keyboardEvents(e));   
+
+function keyboardEvents(e) {
+  if(e.key >= 0 && e.key <= 9) {
     // console.log(e.key);
-})
+    saveOperand(e);
+  } 
+  else if(e.key === '+' || e.key === '-' || e.key === '*'  || e.key === '/') {      
+    inputOperator(e);
+  } 
+  else if ( e.key === '%') {
+    inputPercentage();
+  }
+  // else if(key === 'Backspace') {
 
-function keyboardEvents(e)
-{
-    if(e.key >= 0 && e.key <= 9) {
-      // console.log(e.key);
-      saveOperand(e);
-    } 
-    else if(e.key === '+' || e.key === '-' || e.key === '*'  || e.key === '/' || e.key === '%') {      
-      inputOperator(e);
-    } 
-    // else if(key === 'Backspace') {
-
-    // }
-    else if(e.key === 'Enter' || e.key === '=') {
-      inputEqual(e);
-    }
-    else if(e.key === 'Delete') {
-       
-    }
+  // }
+  else if(e.key === 'Enter' || e.key === '=') {
+    inputEqual(e);
+  }
+  else if(e.key === 'Delete') {
+      
+  }
 }
 
 
