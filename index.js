@@ -66,7 +66,7 @@ const dividedByZero = () => {
   infinitum = true;
 }
 
-const translateOperator = (operator) => {
+function translateOperator(operator) {
   if(operator === '+') {
     console.log("add");
     return add;
@@ -84,6 +84,26 @@ const translateOperator = (operator) => {
     return modulo;
   }
 }
+
+
+// const translateOperator = (operator) => {
+//   if(operator === '+') {
+//     console.log("add");
+//     return add;
+//   } else if(operator === '-') {
+//     console.log("subtract");
+//     return subtract;
+//   } else if(operator === 'x') {
+//     console.log("multiply");
+//     return multiply;
+//   } else if(operator === '/') {
+//     console.log("divide");
+//     return divide;
+//   } else {
+//     console.log("modulo");
+//     return modulo;
+//   }
+// }
 
 
 
@@ -146,15 +166,15 @@ clearButton.addEventListener('click', clearCalc);
 // OPERATORS
 ////////////
 const add = (a, b) => {
-  return a + b;   
+  return Number((a + b).toFixed(6));   
 }
 
 const subtract = (a, b) => {
-  return a - b;
+  return Number((a - b).toFixed(6));
 }
 
 const multiply = (a, b) => {
-  return Number((a * b).toFixed(4));
+  return Number((a * b).toFixed(6));
 }
 
 const divide = (a, b) => {
@@ -163,7 +183,7 @@ const divide = (a, b) => {
     return;
   } 
   
-  return Number((a / b).toFixed(4));  
+  return Number((a / b).toFixed(6));  
 }
 
 const modulo = (a, b) => {
@@ -178,7 +198,7 @@ const modulo = (a, b) => {
 
 function operate (a, b, operator) {  
   result = operator(a,b);  
-  // console.log(result);
+  console.log(result);
 }
 
 
