@@ -121,7 +121,7 @@ function inputOperator(e) {
     return;
   } 
 
-  if (!a && helper) {
+  if (!a && helper || a === "-" && helper) {
     console.log("return");
     return;
   }
@@ -290,7 +290,7 @@ function keyboardEvents(e) {
     inputEqual(e);
   }
   else if(e.key === 'Delete') {
-      
+    clearCalc();
   }
 }
 
