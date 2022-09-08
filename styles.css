@@ -57,8 +57,7 @@ button {
   background-color: rgb(178, 229, 248);
 }
 
-.clear-button,
-.zero-button {
+.clear-button {
   width: 37%;
   flex: 2 0 auto;  
 }

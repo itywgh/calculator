@@ -78,13 +78,13 @@ function translateOperator(operator) {
   if(operator === '+') {
     console.log("add");
     return add;
-  } else if(operator === '-') {
+  } else if(operator === '−') {
     console.log("subtract");
     return subtract;
   } else if(operator === 'x') {
     console.log("multiply");
     return multiply;
-  } else if(operator === '/') {
+  } else if(operator === '÷') {
     console.log("divide");
     return divide;
   } else {
