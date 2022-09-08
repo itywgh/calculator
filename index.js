@@ -8,6 +8,7 @@ const deleteButton = document.querySelector('.delete-button');
 const equalButton = document.querySelector('.equal-button');
 const clearButton = document.querySelector('.clear-button');
 const percentageButton = document.querySelector('.percentage-button');
+const toDisable = document.querySelectorAll('.to-disable');
 
 
 // LET VARIABLES
@@ -18,7 +19,6 @@ let myOperator;
 let result;
 let infinitum;
 let equalPressed;
-
 
 
 // FUNCTIONS
@@ -58,15 +58,7 @@ const saveOperand = (e) => {
 const clearCalc = () => {
   if (infinitum) {
     currentOperation.classList.remove("we-do-not");
-    operators.forEach(operator => {
-      operator.classList.remove("operator-disabled");
-    });
-    operands.forEach(operand => {
-      operand.classList.remove("operand-disabled");
-    });
-    decimalButton.classList.remove("operand-disabled");
-    deleteButton.classList.remove("operand-disabled");
-    equalButton.classList.remove("operator-disabled");
+    toDisable.forEach(button => button.classList.remove("disabled"));  
     infinitum = false;
   }
   
@@ -83,16 +75,7 @@ const clearCalc = () => {
 const dividedByZero = () => {
   currentOperation.classList.add("we-do-not");
   currentOperation.textContent = `We Don't Do That Here`;
-  operators.forEach(operator => {
-    operator.classList.add("operator-disabled");
-  });
-  operands.forEach(operand => {
-    operand.classList.add("operand-disabled");
-  });
-  decimalButton.classList.add("operand-disabled");
-  deleteButton.classList.add("operand-disabled");
-  equalButton.classList.add("operator-disabled");
-  percentageButton.classList.add("operator-disabled");
+  toDisable.forEach(button => button.classList.add("disabled"));
   infinitum = true;
 }
 
@@ -151,6 +134,11 @@ function inputOperator(e) {
 }
 
 function inputEqual(e) {
+  if (result === Infinity) {
+    dividedByZero();
+    return;
+  }
+
   if (a === "" || b === "") { // If a or b are not defined yet
     console.log("undefined");
     return;
@@ -303,14 +291,16 @@ const add = (a, b) => Number((a + b).toFixed(6));
 const subtract = (a, b) => Number((a - b).toFixed(6));
 const multiply = (a, b) => Number((a * b).toFixed(6));
 const percentage = (number) => Number((number / 100).toFixed(6));
-const divide = (a, b) => {
-  if(b === 0) {
-    dividedByZero();         
-    return;
-  } 
+const divide = (a, b) => Number((a / b).toFixed(6)); 
+
+// {
+//   if(b === 0 && equalPressed === true) {
+//     dividedByZero();       
+//     return;
+//   } 
   
-  return Number((a / b).toFixed(6));  
-}
+//   return Number((a / b).toFixed(6));  
+// }
 
 
 
