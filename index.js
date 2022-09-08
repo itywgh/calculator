@@ -17,12 +17,9 @@ let result;
 let decimalState = true;
 let infinitum;
 
-
-// var displayValue = 0;
-
-
-
+///////////
 // FUNCTION
+///////////
 const saveOperand = (e) => {
   if(!a && a !== 0 || !secondOperation) {    
     a += e.target.textContent;
@@ -33,39 +30,7 @@ const saveOperand = (e) => {
       currentOperation.textContent = parseFloat(b, 10); // DISPLAY
       console.log(`b = ${b}`);    
       operate(parseFloat(a), parseFloat(b), translateOperator(myOperator)); // OPERATION
- }
-  // if(!a || decimalState === true) {   
-  //   secondOperation = true; 
-  //   a += e.target.textContent;
-  //   currentOperation.textContent = a;
-  //   console.log(a);
-  // } else if(e.target.textContent === "." && secondOperation) {
-  //   console.log(`decimal and secondOperation ${secondOperation}`)
-  //   a += ".";
-  //   decimalState = true;
-  //   console.log(`new a = ${a}`);
-  // } else if(e.target.textContent === "." && !secondOperation) {
-  //   console.log(`decimalState: ${decimalState}`)
-  //   console.log(`decimal and secondOperation ${secondOperation}`)
-  //   b += ".";
-  //   currentOperation.textContent = b;
-  //   console.log(`b at the last else if: ${b}`);
-  // } else if(!b || decimalState === false) {
-  //   if(decimalState) {
-  //     a += e.target.textContent;
-  //     return;
-  //   } 
-    
-  //   secondOperation = false;
-  //   b += parseFloat(e.target.textContent);
-  //   currentOperation.textContent = b;
-  //   console.log(b);    
-  //   operate(parseFloat(a), parseFloat(b), translateOperator(myOperator));
-  
-  //   // Remember that operate() doesn't return a result
-  //   // Do not console.log(result)
-  //   // Go to operate()
-  // } 
+    } 
 };
 
 
@@ -100,6 +65,27 @@ const dividedByZero = () => {
   equalButton.classList.add("operator-disabled");
   infinitum = true;
 }
+
+const translateOperator = (operator) => {
+  if(operator === '+') {
+    console.log("add");
+    return add;
+  } else if(operator === '-') {
+    console.log("subtract");
+    return subtract;
+  } else if(operator === 'x') {
+    console.log("multiply");
+    return multiply;
+  } else if(operator === '/') {
+    console.log("divide");
+    return divide;
+  } else {
+    console.log("modulo");
+    return modulo;
+  }
+}
+
+
 
 ///////////////////
 // EVENT LISTENERS
@@ -140,33 +126,15 @@ decimalButton.addEventListener('click', () => {
 });
 
 
-// operators.forEach(operator =>
-//   operator.addEventListener('click', (e) => {    
-//     if (secondOperation) {
-//       myOperator = e.target.textContent;
-//       console.log(myOperator);
-//       decimalState = false;   
-//     } else {
-//         myOperator = e.target.textContent;
-//         console.log(myOperator);    
-//         currentOperation.textContent = result;
-//         result ? a = result : a = "";       
-//         b = null;
-//         secondOperation = true;
-//         decimalState = false;
-//     }   
-// }));
-
-
-
-
-
 equalButton.addEventListener('click', () => {
-  a = result;
+  if (a === "" || b === "") { // If a or b are not defined yet
+    console.log("undefined");
+    return;
+  } 
+  a = result;    
   b = "";
   currentOperation.textContent = result;
 });
-
 
 
 clearButton.addEventListener('click', clearCalc);
@@ -174,10 +142,9 @@ clearButton.addEventListener('click', clearCalc);
 
 
 
-
+////////////
 // OPERATORS
-
-
+////////////
 const add = (a, b) => {
   return a + b;   
 }
@@ -205,32 +172,13 @@ const modulo = (a, b) => {
 
 
 //  FUNCTIONS
-const translateOperator = (operator) => {
-  if(operator === '+') {
-    console.log("add");
-    return add;
-  } else if(operator === '-') {
-    console.log("subtract");
-    return subtract;
-  } else if(operator === 'x') {
-    console.log("multiply");
-    return multiply;
-  } else if(operator === '/') {
-    console.log("divide");
-    return divide;
-  } else {
-    console.log("modulo");
-    return modulo;
-  }
-}
 
 
 
-function operate (a, b, operator) {
-  currentValue = operator(a,b);
-  result = currentValue;
-  console.log(result); 
-  // currentOperation.textContent = currentValue;
+
+function operate (a, b, operator) {  
+  result = operator(a,b);  
+  // console.log(result);
 }
 
 
