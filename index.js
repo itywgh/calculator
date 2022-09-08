@@ -4,6 +4,7 @@ const currentOperation = document.querySelector('.current-operation');
 const operators = document.querySelectorAll('.operator');
 const operands = document.querySelectorAll('.operand');
 const decimalButton = document.querySelector('.decimal-button');
+const deleteButton = document.querySelector('.delete-button');
 const equalButton = document.querySelector('.equal-button');
 const clearButton = document.querySelector('.clear-button');
 
@@ -18,9 +19,8 @@ let infinitum;
 let equalPressed;
 
 
-////////////
+
 // FUNCTIONS
-////////////
 const saveOperand = (e) => {
   if(!a && a !== 0 || !secondOperation) {    
     a += e.target.textContent;
@@ -45,6 +45,7 @@ const clearCalc = () => {
       operand.classList.remove("operand-disabled");
     });
     decimalButton.classList.remove("operand-disabled");
+    deleteButton.classList.remove("operand-disabled");
     equalButton.classList.remove("operator-disabled");
     infinitum = false;
   }
@@ -69,6 +70,7 @@ const dividedByZero = () => {
     operand.classList.add("operand-disabled");
   });
   decimalButton.classList.add("operand-disabled");
+  deleteButton.classList.add("operand-disabled");
   equalButton.classList.add("operator-disabled");
   infinitum = true;
 }
@@ -76,27 +78,26 @@ const dividedByZero = () => {
 
 function translateOperator(operator) {
   if(operator === '+') {
-    console.log("add");
     return add;
   } else if(operator === '−') {
-    console.log("subtract");
     return subtract;
-  } else if(operator === 'x') {
-    console.log("multiply");
+  } else if(operator === 'x') { 
     return multiply;
   } else if(operator === '÷') {
-    console.log("divide");
     return divide;
   } else {
-    console.log("modulo");
     return modulo;
   }
 }
 
+function operate (a, b, operator) {  
+  result = operator(a,b);  
+  console.log(result);
+}
 
-///////////////////
+
+
 // EVENT LISTENERS
-//////////////////
 operands.forEach(operand => 
   operand.addEventListener('click', saveOperand));
 
@@ -166,21 +167,11 @@ clearButton.addEventListener('click', clearCalc);
 
 
 
-////////////
 // OPERATORS
-////////////
-const add = (a, b) => {
-  return Number((a + b).toFixed(6));   
-}
-
-const subtract = (a, b) => {
-  return Number((a - b).toFixed(6));
-}
-
-const multiply = (a, b) => {
-  return Number((a * b).toFixed(6));
-}
-
+const add = (a, b) => Number((a + b).toFixed(6));
+const subtract = (a, b) => Number((a - b).toFixed(6));
+const multiply = (a, b) => Number((a * b).toFixed(6));
+const modulo = (a, b) => a % b;
 const divide = (a, b) => {
   if(b === 0) {
     dividedByZero();         
@@ -190,16 +181,12 @@ const divide = (a, b) => {
   return Number((a / b).toFixed(6));  
 }
 
-const modulo = (a, b) => {
-  return a % b;
-}
 
 
-//  FUNCTIONS
-function operate (a, b, operator) {  
-  result = operator(a,b);  
-  console.log(result);
-}
+// function operate (a, b, operator) {  
+//   result = operator(a,b);  
+//   console.log(result);
+// }
 
 
 
