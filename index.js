@@ -14,12 +14,13 @@ let b = "";
 let secondOperation;
 let myOperator;
 let result;
-let decimalState = true;
 let infinitum;
+let equalPressed;
 
-///////////
-// FUNCTION
-///////////
+
+////////////
+// FUNCTIONS
+////////////
 const saveOperand = (e) => {
   if(!a && a !== 0 || !secondOperation) {    
     a += e.target.textContent;
@@ -34,13 +35,16 @@ const saveOperand = (e) => {
 };
 
 
-
 const clearCalc = () => {
   if (infinitum) {
     currentOperation.classList.remove("we-do-not");
     operators.forEach(operator => {
       operator.classList.remove("operator-disabled");
     });
+    operands.forEach(operand => {
+      operand.classList.remove("operand-disabled");
+    });
+    decimalButton.classList.remove("operand-disabled");
     equalButton.classList.remove("operator-disabled");
     infinitum = false;
   }
@@ -52,7 +56,6 @@ const clearCalc = () => {
   secondOperation = false;
   b = "";
   result = 0;
-  // decimalState = true;
 }
 
 
@@ -62,9 +65,14 @@ const dividedByZero = () => {
   operators.forEach(operator => {
     operator.classList.add("operator-disabled");
   });
+  operands.forEach(operand => {
+    operand.classList.add("operand-disabled");
+  });
+  decimalButton.classList.add("operand-disabled");
   equalButton.classList.add("operator-disabled");
   infinitum = true;
 }
+
 
 function translateOperator(operator) {
   if(operator === '+') {
@@ -84,27 +92,6 @@ function translateOperator(operator) {
     return modulo;
   }
 }
-
-
-// const translateOperator = (operator) => {
-//   if(operator === '+') {
-//     console.log("add");
-//     return add;
-//   } else if(operator === '-') {
-//     console.log("subtract");
-//     return subtract;
-//   } else if(operator === 'x') {
-//     console.log("multiply");
-//     return multiply;
-//   } else if(operator === '/') {
-//     console.log("divide");
-//     return divide;
-//   } else {
-//     console.log("modulo");
-//     return modulo;
-//   }
-// }
-
 
 
 ///////////////////
@@ -134,15 +121,31 @@ operators.forEach(operator =>
 
 
 decimalButton.addEventListener('click', () => {
+  if (b.includes(".")) { // Avoid adding a dot while input b    
+    return;
+  }
+
+  if (b === "" && equalPressed === true) { // If the input is decimal point after equal signed was pressed.
+    secondOperation = false;               // We "reset" and start receiving 'a' input
+    a = ".";
+    currentOperation.textContent = a;
+    equalPressed = false;
+    return;
+  }
+
   if (!secondOperation) {
+    if (a.includes(".")) { // Avoid adding a dot while input a
+      return;
+    }
     a += ".";
-    currentOperation.textContent = parseFloat(a, 10); // DISPLAY
+    currentOperation.textContent = a;//parseFloat(a, 10); // DISPLAY
     console.log(`a = ${a}`);
   } else {
-    b += ".";
-    currentOperation.textContent = parseFloat(b, 10); // DISPLAY
-    console.log(`b = ${b}`);
-  }
+      console.log("b here");
+      b += ".";
+      currentOperation.textContent = b;//parseFloat(b, 10); // DISPLAY
+      console.log(`b = ${b}`);
+    }
 });
 
 
@@ -151,14 +154,15 @@ equalButton.addEventListener('click', () => {
     console.log("undefined");
     return;
   } 
+  // secondOperation = false;
   a = result;    
   b = "";
   currentOperation.textContent = result;
+  equalPressed = true;
 });
 
 
 clearButton.addEventListener('click', clearCalc);
-
 
 
 
@@ -192,10 +196,6 @@ const modulo = (a, b) => {
 
 
 //  FUNCTIONS
-
-
-
-
 function operate (a, b, operator) {  
   result = operator(a,b);  
   console.log(result);
