@@ -1,9 +1,23 @@
+/* Regular Weight  */
+@font-face {
+  font-family: "Technology";
+  font-style: normal;
+  font-weight: normal;
+  src: url(./fonts/technology.regular.ttf);
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: rgb(103, 123, 161);
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    rgba(113, 219,  212, 0.55) 14%,    
+    rgba(233, 60, 172,0.5) 50%,
+     rgba(0,188,225,0.5) 100%);
 }
 
 .title {
@@ -13,6 +27,7 @@ body {
 .main-container {
   display: flex;
   justify-content: center;
+  height: 600px;
 }
 
 .calc-container {
@@ -20,18 +35,25 @@ body {
   flex-direction: column;
   width: 300px;
   align-items: flex-end;
+  margin-top: 100px;
 }
 
 .calc-display {
+  font-family: Technology;  
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  height: 80px;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
   width: 100%;
   border: 1px solid black;
-  background-color: white;
-  border-radius: 3px;
-  margin-bottom: -1px;
+  background-color: rgb(64, 72, 79);
+  border-radius: 7px;
+  margin-bottom: -2px;
+  /* color:rgb(115, 162, 77); */
+  color: rgb(122, 232, 195);
+  box-shadow: 6px 6px 8px rgb(57, 58, 58);
+  padding: 10px;
 }
 
 .last-operation {
@@ -39,42 +61,62 @@ body {
 }
 
 .current-operation {
-  font-size: 34px;
+  font-size: 44px;
+  align-self: flex-end;
 }
 
 .calc-buttons {
   display: flex;
   flex-flow: row wrap;
+  box-shadow: 6px 6px 8px rgb(57, 58, 58);
 }
 
 button {
   flex: 1;
   padding: 1em 1.5em;
-  border: 1px solid rgb(175, 170, 170);
+  border: 1px solid black;
   font-weight: bold;
   font-size: 18px;
   cursor: pointer;
   background-color: rgb(178, 229, 248);
+  border-radius: 3px; 
+  transition: all .15s;
 }
+
+button:hover {
+  background-color:rgb(149, 189, 204);
+}
+
+button:active {
+  opacity: .65;
+}
+
 
 .clear-button {
   width: 37%;
   flex: 2 0 auto;  
+  background-color: bisque;
 }
 
-.clear-button {
-  background-color: bisque;
+.clear-button:hover {
+  background-color: rgb(218, 195, 169);
 }
 
 .operator,
 .equal-button,
 .percentage-button {
   background-color: rgb(250, 189, 198);
+  transition: all .15s;
 }
 
+.operator:hover,
+.equal-button:hover,
+.percentage-button:hover {
+  background-color: rgb(212, 147, 157);
+}
 
 .we-do-not {
-  font-size: 18px;
+  font-size: 28px;
   color: rgb(182, 17, 17);
   font-weight: bold;
 }
