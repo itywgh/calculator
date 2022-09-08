@@ -7,6 +7,7 @@ const decimalButton = document.querySelector('.decimal-button');
 const deleteButton = document.querySelector('.delete-button');
 const equalButton = document.querySelector('.equal-button');
 const clearButton = document.querySelector('.clear-button');
+const percentageButton = document.querySelector('.percentage-button');
 
 
 // LET VARIABLES
@@ -91,6 +92,7 @@ const dividedByZero = () => {
   decimalButton.classList.add("operand-disabled");
   deleteButton.classList.add("operand-disabled");
   equalButton.classList.add("operator-disabled");
+  percentageButton.classList.add("operator-disabled");
   infinitum = true;
 }
 
@@ -102,11 +104,16 @@ function translateOperator(operator) {
     return subtract;
   } else if(operator === 'x' || operator === '*') { 
     return multiply;
-  } else if(operator === '/') {
-    return divide;
   } else {
-    return modulo;
-  }
+    return divide;
+  } 
+  
+  // else (operator === '/') {
+  //   return divide;
+  // } 
+  // else {
+  //   return percentage;
+  // }
 }
 
 
@@ -157,6 +164,32 @@ function inputEqual(e) {
   equalPressed = true;
   console.log(`equalPressed = ${equalPressed}`);
 }
+
+function inputPercentage(e) {
+  if (!a && !b) {
+    return;
+  }
+  console.log(myOperator);
+  if (!secondOperation || !b) {    
+    a = percentage(a);    
+    result = a;
+    console.log(result);
+    currentOperation.textContent = result;
+    secondOperation = true;       
+  } 
+  else {        
+         
+    // result ? a = result : a = 0;      
+    // console.log(`result = ${result} and a = ${a}`); 
+    b = percentage(b); 
+    console.log(b);
+    currentOperation.textContent = b;
+    console.log(`b after the 1st operator = ${b}`);
+  }
+  equalPressed = false;
+}
+
+
 
 // EVENT LISTENERS
 operands.forEach(operand => 
@@ -211,6 +244,8 @@ decimalButton.addEventListener('click', () => {
     }
 });
 
+
+percentageButton.addEventListener('click', inputPercentage);
 
 
 equalButton.addEventListener('click', inputEqual);
@@ -267,7 +302,7 @@ function keyboardEvents(e)
 const add = (a, b) => Number((a + b).toFixed(6));
 const subtract = (a, b) => Number((a - b).toFixed(6));
 const multiply = (a, b) => Number((a * b).toFixed(6));
-const modulo = (a, b) => a % b;
+const percentage = (number) => Number((number / 100).toFixed(6));
 const divide = (a, b) => {
   if(b === 0) {
     dividedByZero();         
