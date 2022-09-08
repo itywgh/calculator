@@ -114,10 +114,21 @@ function inputOperator(e) {
   } else {
     helper = e.key;
   }  
+
+  if (!a && helper === '-') {
+    a += helper;
+    currentOperation.textContent = a;
+    return;
+  } 
+
+  if (!a && helper) {
+    console.log("return");
+    return;
+  }
+  console.log(`secondOperation is ${secondOperation}`);
   
   if (!secondOperation) {
     myOperator = helper;
-    console.log(myOperator);
     secondOperation = true;
     
        
