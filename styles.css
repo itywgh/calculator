@@ -67,9 +67,11 @@ button {
 }
 
 .operator,
-.equal-button {
+.equal-button,
+.percentage-button {
   background-color: rgb(250, 189, 198);
 }
+
 
 .we-do-not {
   font-size: 18px;
@@ -77,20 +79,14 @@ button {
   font-weight: bold;
 }
 
-.operator-disabled {
+.disabled {
   cursor: default;
-  opacity: 0.85;
-  background-color:  rgb(184, 144, 150);
+  opacity: 0.65;
+  /* background-color:  rgb(184, 144, 150); */
   pointer-events: none;
   border-color: rgb(182, 17, 17);
 }
 
-.operand-disabled {
-  cursor: default;
-  opacity: 0.85;
-  background-color: rgb(153, 190, 204);
-  border-color: rgb(182, 17, 17);
-  pointer-events: none;
-}
+
 
 
