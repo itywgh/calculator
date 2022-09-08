@@ -1,4 +1,6 @@
 // QUERIES
+const theme = document.querySelector('.dark-mode-img');      // Dark Mode
+console.log(changeTheme);
 const lastOperation = document.querySelector('.last-operation');
 const currentOperation = document.querySelector('.current-operation');
 const operators = document.querySelectorAll('.operator');
@@ -188,6 +190,10 @@ function inputPercentage(e) {
   equalPressed = false;
 }
 
+function changeTheme() {
+  document.body.classList.toggle("dark-mode");
+}
+
 
 
 // EVENT LISTENERS
@@ -267,6 +273,12 @@ equalButton.addEventListener('click', inputEqual);
 
 
 clearButton.addEventListener('click', clearCalc);
+
+
+// Dark Mode
+theme.addEventListener('click', changeTheme);  
+    
+
 
 
 // KEYBOARD EVENT LISTENER
