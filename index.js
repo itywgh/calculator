@@ -1,6 +1,5 @@
 // QUERIES
 const theme = document.querySelector('.dark-mode-img');      // Dark Mode
-console.log(changeTheme);
 const lastOperation = document.querySelector('.last-operation');
 const currentOperation = document.querySelector('.current-operation');
 const operators = document.querySelectorAll('.operator');
@@ -41,32 +40,32 @@ const saveOperand = (e) => {
   }
 
 
-  else if(!a && a !== 0 || !secondOperation) {           
+  else if (!a && a !== 0 || !secondOperation) {
     // a += e.target.textContent;
     a += helper;
     // console.log(`A is ${a}`);
     currentOperation.textContent = parseFloat(a, 10); // DISPLAY
     console.log(`a = ${a}`);
-  } else if(!b || secondOperation) {            
-      // b += e.target.textContent;
-      b += helper;
-      currentOperation.textContent = parseFloat(b, 10); // DISPLAY
-      console.log(`b = ${b}`);    
-      operate(parseFloat(a), parseFloat(b), translateOperator(myOperator)); // OPERATION
-    } 
+  } else if (!b || secondOperation) {
+    // b += e.target.textContent;
+    b += helper;
+    currentOperation.textContent = parseFloat(b, 10); // DISPLAY
+    console.log(`b = ${b}`);
+    operate(parseFloat(a), parseFloat(b), translateOperator(myOperator)); // OPERATION
+  }
 };
 
 
 const clearCalc = () => {
   if (infinitum) {
     currentOperation.classList.remove("we-do-not");
-    toDisable.forEach(button => button.classList.remove("disabled"));  
+    toDisable.forEach(button => button.classList.remove("disabled"));
     infinitum = false;
   }
-  
+
   lastOperation.textContent = "";
   currentOperation.textContent = "";
- 
+
   a = "";
   secondOperation = false;
   b = "";
@@ -83,16 +82,16 @@ const dividedByZero = () => {
 
 
 function translateOperator(operator) {
-  if(operator === '+') {
+  if (operator === '+') {
     return add;
-  } else if(operator === '-') {
+  } else if (operator === '-') {
     return subtract;
-  } else if(operator === 'x' || operator === '*') { 
+  } else if (operator === 'x' || operator === '*') {
     return multiply;
   } else {
     return divide;
-  } 
-  
+  }
+
   // else (operator === '/') {
   //   return divide;
   // } 
@@ -102,8 +101,8 @@ function translateOperator(operator) {
 }
 
 
-function operate (a, b, operator) {  
-  result = operator(a,b);  
+function operate(a, b, operator) {
+  result = operator(a, b);
   console.log(result);
 }
 
@@ -115,33 +114,33 @@ function inputOperator(e) {
     helper = e.target.dataset.key;
   } else {
     helper = e.key;
-  }  
+  }
 
   if (!a && helper === '-') {
     a += helper;
     currentOperation.textContent = a;
     return;
-  } 
+  }
 
   if (!a && helper || a === "-" && helper) {
     console.log("return");
     return;
   }
   console.log(`secondOperation is ${secondOperation}`);
-  
+
   if (!secondOperation) {
     myOperator = helper;
     secondOperation = true;
-    
-       
+
+
   } else {
-      myOperator = helper;
-      console.log(myOperator);    
-      currentOperation.textContent = result;
-      result ? a = result : a = 0;      
-      console.log(`result = ${result} and a = ${a}`); 
-      b = ""; 
-      console.log(`b after the 1st operator = ${b}`);
+    myOperator = helper;
+    console.log(myOperator);
+    currentOperation.textContent = result;
+    result ? a = result : a = 0;
+    console.log(`result = ${result} and a = ${a}`);
+    b = "";
+    console.log(`b after the 1st operator = ${b}`);
   }
   equalPressed = false;
 }
@@ -155,9 +154,9 @@ function inputEqual(e) {
   if (a === "" || b === "") { // If a or b are not defined yet
     console.log("undefined");
     return;
-  } 
+  }
   // secondOperation = false;
-  a = result;    
+  a = result;
   console.log(`after equalButton, a = ${a}`)
   b = "";
   console.log(`after equalButton, b = ${b}`)
@@ -171,18 +170,18 @@ function inputPercentage(e) {
     return;
   }
   console.log(myOperator);
-  if (!secondOperation || !b) {    
-    a = percentage(a);    
+  if (!secondOperation || !b) {
+    a = percentage(a);
     result = a;
     console.log(result);
     currentOperation.textContent = result;
-    secondOperation = true;       
-  } 
-  else {        
-         
+    secondOperation = true;
+  }
+  else {
+
     // result ? a = result : a = 0;      
     // console.log(`result = ${result} and a = ${a}`); 
-    b = percentage(b); 
+    b = percentage(b);
     console.log(b);
     currentOperation.textContent = b;
     console.log(`b after the 1st operator = ${b}`);
@@ -197,26 +196,26 @@ function changeTheme() {
 
 
 // EVENT LISTENERS
-operands.forEach(operand => 
+operands.forEach(operand =>
   operand.addEventListener('click', saveOperand));
 
-operators.forEach(operator =>  
+operators.forEach(operator =>
   // operator.addEventListener('click', (e) => {    
-    operator.addEventListener('click', inputOperator));
-  //   if (!secondOperation) {
-  //     myOperator = e.target.textContent;
-  //     console.log(myOperator);
-  //     secondOperation = true;
-         
-  //   } else {
-  //       myOperator = e.target.textContent;
-  //       console.log(myOperator);    
-  //       currentOperation.textContent = result;
-  //       result ? a = result : a = 0;      
-  //       console.log(`result = ${result} and a = ${a}`); 
-  //       b = "";       
-        
-  //   }
+  operator.addEventListener('click', inputOperator));
+//   if (!secondOperation) {
+//     myOperator = e.target.textContent;
+//     console.log(myOperator);
+//     secondOperation = true;
+
+//   } else {
+//       myOperator = e.target.textContent;
+//       console.log(myOperator);    
+//       currentOperation.textContent = result;
+//       result ? a = result : a = 0;      
+//       console.log(`result = ${result} and a = ${a}`); 
+//       b = "";       
+
+//   }
 //   // }
 // ));
 
@@ -242,11 +241,11 @@ decimalButton.addEventListener('click', () => {
     currentOperation.textContent = a;//parseFloat(a, 10); // DISPLAY
     console.log(`a = ${a}`);
   } else {
-      console.log("b here");
-      b += ".";
-      currentOperation.textContent = b;//parseFloat(b, 10); // DISPLAY
-      console.log(`b = ${b}`);
-    }
+    console.log("b here");
+    b += ".";
+    currentOperation.textContent = b;//parseFloat(b, 10); // DISPLAY
+    console.log(`b = ${b}`);
+  }
 });
 
 
@@ -276,32 +275,32 @@ clearButton.addEventListener('click', clearCalc);
 
 
 // Dark Mode
-theme.addEventListener('click', changeTheme);  
-    
+theme.addEventListener('click', changeTheme);
+
 
 
 
 // KEYBOARD EVENT LISTENER
-window.addEventListener('keydown', e => keyboardEvents(e));   
+window.addEventListener('keydown', e => keyboardEvents(e));
 
 function keyboardEvents(e) {
-  if(e.key >= 0 && e.key <= 9) {
+  if (e.key >= 0 && e.key <= 9) {
     // console.log(e.key);
     saveOperand(e);
-  } 
-  else if(e.key === '+' || e.key === '-' || e.key === '*'  || e.key === '/') {      
+  }
+  else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
     inputOperator(e);
-  } 
-  else if ( e.key === '%') {
+  }
+  else if (e.key === '%') {
     inputPercentage();
   }
   // else if(key === 'Backspace') {
 
   // }
-  else if(e.key === 'Enter' || e.key === '=') {
+  else if (e.key === 'Enter' || e.key === '=') {
     inputEqual(e);
   }
-  else if(e.key === 'Delete') {
+  else if (e.key === 'Delete') {
     clearCalc();
   }
 }
@@ -312,14 +311,14 @@ const add = (a, b) => Number((a + b).toFixed(6));
 const subtract = (a, b) => Number((a - b).toFixed(6));
 const multiply = (a, b) => Number((a * b).toFixed(6));
 const percentage = (number) => Number((number / 100).toFixed(6));
-const divide = (a, b) => Number((a / b).toFixed(6)); 
+const divide = (a, b) => Number((a / b).toFixed(6));
 
 // {
 //   if(b === 0 && equalPressed === true) {
 //     dividedByZero();       
 //     return;
 //   } 
-  
+
 //   return Number((a / b).toFixed(6));  
 // }
 
