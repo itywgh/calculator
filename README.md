@@ -5,7 +5,7 @@ Live demo:
 ## Description
 
 Calculator with basic functions.
-Project from [The Odin Project](https://www.theodinproject.com/lessons/foundations-calculator)
+Project from [The Odin Project](https://www.theodinproject.com/lessons/foundations-calculator).
 
 ## Visuals
 
